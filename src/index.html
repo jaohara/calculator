@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+
+  <link rel="stylesheet" href="style/style.css" />
+</head>
+<body>
+  <div id="menu-container">
+    <h1>Test Test</h1>
+
+    <p>
+      Right now, this should just be a test. Nothing to worry about.
+    </p>
+
+  </div>
+
+  <div id="app-controls">
+    <button id="menu-button" class="control-button">m</button>
+    <button id="exit-button" class="control-button">x</button>
+  </div>
+
+  <div id="app-container">  
+    <div id="calculator-container">
+      <div id="calculator-output">
+        <div id="current-equation">
+          <span class="number">3245</span>
+          <span class="operand">+</span> 
+          <span class="number">54.032</span>
+          <span class="operand">-</span>
+        </div>
+        <div id="current-input">879.4512</div>
+      </div>
+  
+      <div id="calculator-input">
+        <!-- Row 1 -->
+        <button class="input-button action-button" id="b-clearall">A</button>
+        <button class="input-button action-button" id="b-clear">C</button>        
+        <button class="input-button action-button" id="b-delete">D</button>        
+        <button class="input-button operator-button" id="b-add">+</button>
+        
+        <!-- Row 2 -->
+        <button class="input-button value-button" id="b-7">7</button>
+        <button class="input-button value-button" id="b-8">8</button>    
+        <button class="input-button value-button" id="b-9">9</button>
+        <button class="input-button operator-button" id="b-subtract"> - </button>
+        
+        <!-- Row 3 -->
+        <button class="input-button value-button" id="b-4">4</button>
+        <button class="input-button value-button" id="b-5">5</button>
+        <button class="input-button value-button" id="b-6">6</button>
+        <button class="input-button operator-button" id="b-multiply">*</button>
+        
+        <!-- Row 4 -->
+        <button class="input-button value-button" id="b-1">1</button>
+        <button class="input-button value-button" id="b-2">2</button>
+        <button class="input-button value-button" id="b-3">3</button>
+        <button class="input-button operator-button" id="b-divide">/</button>
+        
+        <!-- Row 5 -->
+        <button class="input-button value-button" id="b-decimal">.</button>
+        <button class="input-button value-button" id="b-0">0</button>
+        <button class="input-button operator-button" id="b-modulo">%</button>
+        <button class="input-button operator-button" id="b-equals">=</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

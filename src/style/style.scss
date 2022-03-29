@@ -1,0 +1,245 @@
+@import url("./oakes_grotesk/OakesGrotesk.css");
+
+$main-font: "Oakes Grotesk", sans-serif;
+
+$global-br: .5rem;
+
+$app-padding: 2rem;
+
+$full-height: calc(100vh - (2 * $app-padding));
+
+$yellow:#FEC608;
+$light-orange: #FC9814;
+$dark-orange: #FE4B08;
+
+$menu-transition-speed: 150ms;
+$display-transition-speed: 150ms;
+$button-transition-speed: 100ms;
+$button-transitions: background $button-transition-speed, 
+  color $button-transition-speed, border $button-transition-speed; 
+
+* {
+  font-family: $main-font;
+  user-select: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+button:focus {
+  outline: none;
+}
+
+#app-container {
+  height: $full-height;
+  padding: $app-padding;
+}
+
+// ============
+// App Controls
+// ============
+
+#app-controls {
+  background: transparent;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+  position: fixed;
+  // right: 0;
+  width: 100%;
+  z-index: 101;
+
+  -webkit-app-region: drag;
+
+  button {
+    background: #efefef;
+    border: 0px solid transparent;
+    border-radius: $global-br;
+    font-weight: bold;
+    height: 32px;
+    margin-left: .5rem;
+    transition: color $menu-transition-speed, background $menu-transition-speed ;
+    width: 32px;
+
+    -webkit-app-region: no-drag;
+
+    &:hover {
+      background: $dark-orange;
+      color: white;
+      cursor: pointer;
+    }
+  }
+
+  &.reverse-controls {
+    flex-direction: row-reverse;
+  }
+}
+
+#menu-container.active + #app-controls button {
+  background: $light-orange;
+  color: white;
+}
+
+
+
+// ============
+// Menu Styling
+// ============
+
+#menu-container {
+  background-color: rgba(0,0,0,0.8);
+  backdrop-filter: blur(10px);
+  box-sizing: border-box;
+  color: $light-orange;
+  // display: none;
+  font-size: 3em;
+  height: 100vh;
+  line-height: 1.3em;
+  opacity: 0;
+  padding: 2rem;
+  position: fixed;
+  transition: opacity $menu-transition-speed;
+  width: 100vw;
+  z-index: -1;
+}
+
+#menu-container.active {
+  // display: block;
+  z-index: 100;
+}
+
+#menu-container.active.opaque {
+  opacity: 1;
+}
+
+
+// ============================
+// Calculator Container Styling
+// ============================
+
+#calculator-container {
+  display: flex;
+  flex-direction: column;
+  height: $full-height;
+  justify-content: space-between;
+  padding-top: 2rem;
+}
+
+#calculator-output, #calculator-input {
+  width: 100%;
+}
+
+
+// ==============
+// Output Styling
+// ==============
+
+#calculator-output {
+  background-color: #efefef;
+  border-radius: $global-br;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(33vh - (3.3 * $app-padding));
+  padding: $app-padding;
+  width: calc(100% - (2 * $app-padding));
+}
+
+#current-equation {
+  align-items: center;
+  border-bottom: 2px solid transparent;
+  display: flex;
+  height: 25%;
+  line-height: 2rem;
+  font-size: 1.5rem;
+  font-style: italic;
+  transition: border $display-transition-speed;
+
+  span {
+    margin-right: .5rem;
+  }
+
+  .operator {
+    color: $dark-orange;
+  }
+}
+
+#current-equation.active {
+  border-bottom: 2px solid $dark-orange;
+}
+
+#current-input {
+  // align-self: flex-end;
+  font-size: 4rem;
+  // height: 0%;
+  text-align: right;
+}
+
+
+// =============
+// Input Styling
+// =============
+
+#calculator-input {
+  // background-color: blue;
+  border-radius: $global-br;
+  display: flex;
+  // flex-direction: column;
+  flex-wrap: wrap;
+  height: calc(70vh - $app-padding);
+  justify-content: space-between;
+  margin-left: -2.5%;
+  // margin-right: -5%;
+  width: 105%;
+}
+
+.input-button {
+  align-items: center;
+  background-color: #efefef;
+  // border-radius: 50%;
+  border-radius: $global-br;
+  border: 4px solid transparent;
+  box-sizing: border-box;
+  display: flex;
+  flex: 1 0 auto;
+  font-size: 2rem;
+  font-weight: 300;
+  justify-content: center;
+  // height: auto;
+  margin: 2.5%;
+  max-height: rem;
+  max-width: 8rem;
+  overflow: hidden;
+  padding: 1rem;
+  transition: $button-transitions;
+  width: 20%;
+
+  &.operator-button, &.action-button {
+    color: white;
+    font-weight: bold;
+  }
+
+  &.operator-button {
+    background-color: $light-orange;
+  }
+
+  &.action-button {
+    background-color: $dark-orange;
+  }
+}
+
+.input-button:hover, .input-button:active {
+  color: white;
+  cursor: pointer;
+}
+
+.input-button:hover {
+  background-color: $light-orange;
+}
+
+.input-button:active {
+  background-color: $dark-orange;
+}

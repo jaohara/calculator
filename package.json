@@ -1,0 +1,18 @@
+{
+  "name": "calculator",
+  "version": "1.0.0",
+  "description": "A simple calculator application written using Electron.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "John O'Hara",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^17.2.0",
+    "sass": "^1.49.9"
+  },
+  "dependencies": {
+    "@electron/remote": "^2.0.8"
+  }
+}

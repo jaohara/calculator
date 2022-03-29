@@ -102,6 +102,7 @@ const clearAll = () => {
 
 // "clear" action handler
 const clearInput = () => {
+  resetFinished();
   state.currentInput = "";
   updateDisplay();
 }
@@ -132,6 +133,11 @@ getByClass("value-button")
 // bind operator button listeners
 getByClass("operator-button")
   .forEach(button => button.addEventListener("click", e => appendOperator(e)));
+
+// bind action button listeners
+getByClass("action-button")
+  .forEach(button => button.addEventListener("click", 
+    e => actions[parseButtonName({target: button})]()));
 
 appControls.menu.addEventListener("click", () => toggleMenu());
 // appControls.exit.addEventListener("click", () => {
@@ -266,7 +272,7 @@ const inputKeys = {
 };
 
 const actions = {
-  clearall: () => {},
+  clearall: clearAll,
   clear: clearInput,
   delete: deleteInput,
 };

@@ -9,6 +9,8 @@ npm install
 npm run start
 ```
 
-# Screens
+# Screenshots
 
-To be added
+![Screenshot 01](screenshots/calculator-01.png)
+
+![Screenshot 02](screenshots/calculator-02.png)

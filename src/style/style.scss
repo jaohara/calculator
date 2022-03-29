@@ -2,7 +2,7 @@
 
 $main-font: "Oakes Grotesk", sans-serif;
 
-$global-br: .5rem;
+$global-br: 4px;
 
 $app-padding: 2rem;
 
@@ -15,8 +15,8 @@ $dark-orange: #FE4B08;
 $menu-transition-speed: 150ms;
 $display-transition-speed: 150ms;
 $button-transition-speed: 100ms;
-$button-transitions: background $button-transition-speed, 
-  color $button-transition-speed, border $button-transition-speed; 
+$button-transitions: background $button-transition-speed, color $button-transition-speed, 
+  border $button-transition-speed, box-shadow $button-transition-speed; 
 
 * {
   font-family: $main-font;
@@ -45,8 +45,8 @@ button:focus {
   background: transparent;
   box-sizing: border-box;
   display: flex;
-  justify-content: flex-end;
-  padding: 1rem;
+  justify-content: space-between;
+  padding: 1.2rem 2rem 0 1.4rem;
   position: fixed;
   // right: 0;
   width: 100%;
@@ -55,11 +55,15 @@ button:focus {
   -webkit-app-region: drag;
 
   button {
+    align-items: center;
     background: #efefef;
-    border: 0px solid transparent;
-    border-radius: $global-br;
+    border: 4px solid transparent;
+    border-radius: 50%;
+    display: flex;
     font-weight: bold;
+    font-size: 1.2rem;
     height: 32px;
+    justify-content: center;
     margin-left: .5rem;
     transition: color $menu-transition-speed, background $menu-transition-speed ;
     width: 32px;
@@ -79,6 +83,11 @@ button:focus {
 }
 
 #menu-container.active + #app-controls button {
+  background: transparent;
+  color: $light-orange;
+}
+
+#menu-container.active + #app-controls button:hover {
   background: $light-orange;
   color: white;
 }
@@ -123,9 +132,9 @@ button:focus {
 #calculator-container {
   display: flex;
   flex-direction: column;
-  height: $full-height;
+  height: calc(100vh - 5.6rem); // hard coded, kinda gross
   justify-content: space-between;
-  padding-top: 2rem;
+  padding-top: 2.4rem;
 }
 
 #calculator-output, #calculator-input {
@@ -203,6 +212,7 @@ button:focus {
   border-radius: $global-br;
   border: 4px solid transparent;
   box-sizing: border-box;
+  box-shadow: 0px 0px 0px 0px inset white;
   display: flex;
   flex: 1 0 auto;
   font-size: 2rem;
@@ -210,7 +220,6 @@ button:focus {
   justify-content: center;
   // height: auto;
   margin: 2.5%;
-  max-height: rem;
   max-width: 8rem;
   overflow: hidden;
   padding: 1rem;
@@ -223,23 +232,33 @@ button:focus {
   }
 
   &.operator-button {
-    background-color: $light-orange;
+    color: $dark-orange;
+    // background-color: $light-orange;
   }
 
   &.action-button {
     background-color: $dark-orange;
   }
+
+  & i {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .input-button:hover, .input-button:active {
-  color: white;
+  // color: white;
   cursor: pointer;
 }
 
 .input-button:hover {
-  background-color: $light-orange;
+  border: 4px solid $dark-orange;
+  box-shadow: 0px 0px 0px 4px inset white;
+  // background-color: $light-orange;
 }
 
 .input-button:active {
   background-color: $dark-orange;
+  color: white;
 }

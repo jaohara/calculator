@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculator</title>
 
+  <link rel="stylesheet" href="../node_modules/remixicon/fonts/remixicon.css" />
+  <link rel="stylesheet" href="../node_modules/boxicons/css/boxicons.min.css" />
   <link rel="stylesheet" href="style/style.css" />
 </head>
 <body>
@@ -19,8 +21,13 @@
   </div>
 
   <div id="app-controls">
-    <button id="menu-button" class="control-button">m</button>
-    <button id="exit-button" class="control-button">x</button>
+    <button id="menu-button" class="control-button">
+      <i class="bx bx-menu"></i>
+    </button>
+
+    <button id="exit-button" class="control-button">
+      <i class="bx bx-x"></i>
+    </button>
   </div>
 
   <div id="app-container">  
@@ -39,26 +46,36 @@
         <!-- Row 1 -->
         <button class="input-button action-button" id="b-clearall">A</button>
         <button class="input-button action-button" id="b-clear">C</button>        
-        <button class="input-button action-button" id="b-delete">D</button>        
-        <button class="input-button operator-button" id="b-add">+</button>
+        <button class="input-button action-button" id="b-delete">
+          <i class="ri-delete-back-2-fill"></i>
+        </button>        
+        <button class="input-button operator-button" id="b-add">
+          <i class="bx bx-plus"></i>
+        </button>
         
         <!-- Row 2 -->
         <button class="input-button value-button" id="b-7">7</button>
         <button class="input-button value-button" id="b-8">8</button>    
         <button class="input-button value-button" id="b-9">9</button>
-        <button class="input-button operator-button" id="b-subtract"> - </button>
+        <button class="input-button operator-button" id="b-subtract">
+          <i class="bx bx-minus"></i>
+        </button>
         
         <!-- Row 3 -->
         <button class="input-button value-button" id="b-4">4</button>
         <button class="input-button value-button" id="b-5">5</button>
         <button class="input-button value-button" id="b-6">6</button>
-        <button class="input-button operator-button" id="b-multiply">*</button>
+        <button class="input-button operator-button" id="b-multiply">
+          <i class="bx bx-x"></i>
+        </button>
         
         <!-- Row 4 -->
         <button class="input-button value-button" id="b-1">1</button>
         <button class="input-button value-button" id="b-2">2</button>
         <button class="input-button value-button" id="b-3">3</button>
-        <button class="input-button operator-button" id="b-divide">/</button>
+        <button class="input-button operator-button" id="b-divide">
+          <i class="ri-divide-fill"></i>
+        </button>
         
         <!-- Row 5 -->
         <button class="input-button value-button" id="b-decimal">.</button>

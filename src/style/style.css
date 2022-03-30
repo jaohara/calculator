@@ -5,8 +5,13 @@
 }
 
 body {
+  box-sizing: border-box;
+  border: 4px solid #413C58;
   margin: 0;
+  max-height: 100vh;
+  overflow: hidden;
   padding: 0;
+  width: 100%;
 }
 
 button:focus {
@@ -45,7 +50,7 @@ button:focus {
   -webkit-app-region: no-drag;
 }
 #app-controls button:hover {
-  background: #FE4B08;
+  background: #413C58;
   color: white;
   cursor: pointer;
 }
@@ -55,11 +60,11 @@ button:focus {
 
 #menu-container.active + #app-controls button {
   background: transparent;
-  color: #FC9814;
+  color: #A3C4BC;
 }
 
 #menu-container.active + #app-controls button:hover {
-  background: #FC9814;
+  background: #A3C4BC;
   color: white;
 }
 
@@ -67,14 +72,17 @@ button:focus {
   background-color: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(10px);
   box-sizing: border-box;
-  color: #FC9814;
+  border: 4px solid #A3C4BC;
+  color: #A3C4BC;
   font-size: 3em;
   height: 100vh;
   line-height: 1.3em;
+  left: 0;
   opacity: 0;
   padding: 2rem;
   position: fixed;
   transition: opacity 150ms;
+  top: 0;
   width: 100vw;
   z-index: -1;
 }
@@ -104,8 +112,8 @@ button:focus {
   border-radius: 4px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   height: calc(33vh - 6.6rem);
+  justify-content: space-between;
   padding: 2rem;
   width: calc(100% - 4rem);
 }
@@ -124,16 +132,25 @@ button:focus {
   margin-right: 0.5rem;
 }
 #current-equation .operator {
-  color: #FE4B08;
+  color: #413C58;
 }
 
 #current-equation.active {
-  border-bottom: 2px solid #FE4B08;
+  border-bottom: 2px solid #413C58;
 }
 
 #current-input {
   font-size: 4rem;
   text-align: right;
+}
+#current-input.small {
+  font-size: 3.2rem;
+}
+#current-input.smaller {
+  font-size: 2.4rem;
+}
+#current-input.smallest {
+  font-size: 1.6rem;
 }
 
 #calculator-input {
@@ -150,7 +167,7 @@ button:focus {
   align-items: center;
   background-color: #efefef;
   border-radius: 4px;
-  border: 4px solid transparent;
+  border: 2px solid transparent;
   box-sizing: border-box;
   box-shadow: 0px 0px 0px 0px inset white;
   display: flex;
@@ -159,7 +176,6 @@ button:focus {
   font-weight: 300;
   justify-content: center;
   margin: 2.5%;
-  max-width: 8rem;
   overflow: hidden;
   padding: 1rem;
   transition: background 100ms, color 100ms, border 100ms, box-shadow 100ms;
@@ -170,15 +186,16 @@ button:focus {
   font-weight: bold;
 }
 .input-button.operator-button {
-  color: #FE4B08;
+  color: #413C58;
 }
 .input-button.action-button {
-  background-color: #FE4B08;
+  background-color: #413C58;
 }
 .input-button i {
   align-items: center;
   display: flex;
   justify-content: center;
+  pointer-events: none;
 }
 
 .input-button:hover, .input-button:active {
@@ -186,12 +203,12 @@ button:focus {
 }
 
 .input-button:hover {
-  border: 4px solid #FE4B08;
-  box-shadow: 0px 0px 0px 4px inset white;
+  border: 2px solid #413C58;
+  box-shadow: 0px 0px 0px 1px inset white;
 }
 
 .input-button:active {
-  background-color: #FE4B08;
+  background-color: #413C58;
   color: white;
 }
 

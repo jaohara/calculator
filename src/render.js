@@ -94,14 +94,16 @@ const toggleMenu = () => {
 
 // "clearall" action handler
 const clearAll = () => {
+  resetFinished();
   state.currentInput = "";
-  state.currentEquation = [];
+  resetEquation();
   updateDisplay();
   updateEquation();
 }
 
 // "clear" action handler
 const clearInput = () => {
+  if (state.finishedCalculation) resetEquation();
   resetFinished();
   state.currentInput = "";
   updateDisplay();
@@ -132,7 +134,10 @@ getByClass("value-button")
 
 // bind operator button listeners
 getByClass("operator-button")
-  .forEach(button => button.addEventListener("click", e => appendOperator(e)));
+  .forEach(button => button.addEventListener("click", e => {
+    console.log(e);
+    appendOperator(e);
+  }));
 
 // bind action button listeners
 getByClass("action-button")
@@ -140,10 +145,6 @@ getByClass("action-button")
     e => actions[parseButtonName({target: button})]()));
 
 appControls.menu.addEventListener("click", () => toggleMenu());
-// appControls.exit.addEventListener("click", () => {
-//   console.log("should be exit");
-//   ipcRenderer.send('close-me');
-// });
 appControls.exit.addEventListener("click", () => window.close());
 
 // Bind hotkeys
@@ -155,23 +156,43 @@ document.addEventListener("keydown", e => {
 document.addEventListener("keydown", e => console.log(`key read: ${e.key}`));
 
 
-// helper methods
+
+// ================
+// Helper Functions
+// ================
+
 const appendInput = e => appendInputDirectly(values[parseButtonName(e)]);
+
 const appendOperator = e => addOperatorToEquationStack(operators[parseButtonName(e)]);
+
 const flipMenuState = () => state.menuActive = !state.menuActive;
+
 const getBoundKeys = () => Object.keys(inputKeys);
+
 const getKey = e => e.key.toLowerCase();
+
 const getOperatorNames = () => Object.keys(operators);
+
 const getOperatorValues = () => Object.values(operators);
+
+const getTrimmedTotal = () => `${state.total}`.length > 32 ? 
+  `${`${state.total}`.slice(0,30)}...`: state.total;
+
 const lockMenuKey = () => state.toggleMenuLock = true;
+
 const parseButtonName = e => e.target.id.split("-")[1].toLowerCase();
+
 const peekEquationStack = () => state.currentEquation.length > 0 && 
   state.currentEquation[state.currentEquation.length - 1];
+
 const unlockMenuKey = () => state.toggleMenuLock = false;
 
-
 const resetEquation = () => state.currentEquation = [];
+
 const resetFinished = () => state.finishedCalculation = false;
+
+const resetInput = () => state.currentInput = "";
+
 const resetTotal = () => state.total = 0;
 
 const resetCalculator = () => {
@@ -186,10 +207,12 @@ const parseBackspace = e => {
 };
 
 const appendInputDirectly = input => {
+  console.log(`attempting to append '${input}'`);
+  
   state.finishedCalculation && resetCalculator();
 
   state.currentInput = input === "." && state.currentInput.includes(".") ?
-    state.currentInput : state.currentInput + input;
+  state.currentInput : state.currentInput + input;
 
   updateDisplay();
 };
@@ -204,6 +227,8 @@ const addInputToEquationStack = () => {
 // TODO: clean up code reuse between this and addInputToEquationStack
 const addOperatorToEquationStack = operator => {
   if (state.currentInput.length === 0 && !state.finishedCalculation) return;
+  
+  console.log(`passed operand check, attempting to append '${operator}'`);
 
   const numberInput = state.finishedCalculation && state.currentInput.length === 0 ?
     Number.parseFloat(state.total) : Number.parseFloat(state.currentInput);
@@ -226,15 +251,34 @@ const addOperatorToEquationStack = operator => {
   updateEquation();
 };
 
-const updateDisplay = () => inputDisplay.innerHTML = state.finishedCalculation ? 
-  state.total : state.currentInput;
+const updateDisplay = () => {
+  let displayClass  = "";
+  let displayString = state.finishedCalculation ? `${state.total}` : `${state.currentInput}`;
+  const { length } = displayString;
+
+  // build class to scale output font
+  if (length > 10) displayClass += "small";
+  if (length > 10 && length < 20) displayClass += "er";
+  if (length >= 20) displayClass += "est";
+
+  // remove all previous classes, add class, update display
+  inputDisplay.classList.remove("small", "smaller", "smallest");
+  displayClass.length > 0 && inputDisplay.classList.add(displayClass);
+  inputDisplay.innerHTML = displayString;
+  // inputDisplay.innerHTML = state.finishedCalculation ? 
+  // state.total : state.currentInput;
+};
 
 const updateEquation = () => {
   const equationComponents = [];
 
   state.currentEquation.forEach(component => {
     const className = Number.isNaN(Number.parseFloat(component)) ? "operator" : "number";
-    equationComponents.push(`<span class="${className}">${component}</span>`);
+    
+    const tag = component === "*" ? '<i class="bx bx-x"></i>' : 
+      component === "/" ? '<i class="ri-divide-fill"></i>' : component;
+    
+    equationComponents.push(`<span class="${className}">${tag}</span>`);
   });
 
   equationDisplay.innerHTML = equationComponents.join(" ");

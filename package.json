@@ -13,7 +13,6 @@
     "sass": "^1.49.9"
   },
   "dependencies": {
-    "@electron/remote": "^2.0.8",
     "boxicons": "^2.1.2",
     "remixicon": "^2.5.0"
   }
